@@ -4,10 +4,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from core.erp.views import test
-
+from core.erp.views.category.list   import lista
 
 
 urlpatterns = [
-    path('prueba/',test),
+    path('category/list/', lista)
 ]

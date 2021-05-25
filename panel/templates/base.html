@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static%}
+    <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/plugins/font-awesome-5.11.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    {% block css %}{% endblock css %}
+    <title>Dashboard</title>
+</head>
+<body>
+    
+{% block body %}
+{% endblock body %}
+
+
+
+<script src="{% static 'lib/adminlte-3.1.0/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'lib/adminlte-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'lib/adminlte-3.1.0/js/adminlte.min.js' %}"></script>
+
+{% block js%}{% endblock js %}
+
+</body>
+</html>-
