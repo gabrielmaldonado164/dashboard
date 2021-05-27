@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block body %}
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
-        <!-- Header -->
         {% include 'navbar-home.html' %}
-        <!-- Content -->
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> Bienvenido <small>Example 3.0</small></h1>
+                            <h1 class="m-0 text-dark">Bienvenido <small>Example 3.0</small></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -24,54 +23,72 @@
             </div>
             <div class="content">
                 <div class="container">
-                    {% block content %}
                     <div class="card card-default">
                         <div class="card-header">
-                          <h3 class="card-title">
-                            <i class="fas fa-search"></i>
-                            {{ title }}
+                            <h3 class="card-title"><i class="fas fa-search">{{ title }}</i></h3>
                         </div>
-                        <!-- /.card-header -->
+    
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table" id="data">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Nro</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                  </tr>
+                                    {% for category in categories %}
+                                    <tr>
+                                        <td>{{ category.id }}</td>
+                                        <td>{{ category.name }}</td>
+                                        <td>
+                                            <a href="{% url 'category_edit_view' category.id %}" type="button" class="btn btn-warning btn-xs"><i class="far fa-edit"></i></a>
+                                            <a href="{% url 'category_delete_view' category.id %}" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
-                              </table>
+                            </table>
                         </div>
-                        <!-- /.card-body -->
-                      </div>
-
-                    {% endblock %}
-                </div>
+                        <div class="card-footer">
+                            <a href="{% url 'category_create_view' %}" class="btn btn-primary" id="btn-test"><i class="fas fa-plus"></i>
+                              Nuevo registro
+                            </a>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
-        <!-- Footer -->
         {% include 'footer.html' %}
+    </div>
 
-{% endblock body %}
+{% endblock %}
+{% block js%}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('#data').DataTable({
+            responsive:true,
+            autoWidth: false,   
+            "language":{
+                url:'{% static "lib/datatables-1.10.24/spanish.txt" %}'
+            }         
+        });
+
+        $('#btn-test').on('click', function(){
+            $.ajax({
+                url:"{% url 'category_list_view' %}",
+                type:'POST',
+                data:{id:1},
+                dataType:'json'
+            }).done(function(data) {
+                console.log(data)
+            }).fail(function(jqXHR, textStatus,errorThrown ) {//methods the ajax for errors
+                alert(textStatus+': '+ errorThrown);
+            })
+
+        });
+    } );
+</script>
+{% endblock js %}
+</body>
