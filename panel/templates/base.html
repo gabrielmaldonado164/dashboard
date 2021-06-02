@@ -8,30 +8,62 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/plugins/font-awesome-5.11.1/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/css/adminlte.min.css' %}">
-    <link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0-dist/css/bootstrap.min.css' %}"> -->
     <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'lib/jquery-confirm-3.3.2/jquery-confirm.min.css' %}">
+    
+
+
     {% block css %}{% endblock css %}
     <title>Dashboard</title>
 </head>
-<body>
-    
-{% block body %}
-{% endblock body %}
+<body class="hold-transition sidebar-mini layout-fixed" >
+    <div class="wrapper">
+        <!-- Header -->
+        {% include 'navbar-home.html' %}
+        <!-- Sidebar -->
+        {% include 'sidebar.html' %}
+        <!-- Content -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark"> Bienvenido <small>Example 3.0</small></h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    {% block content %}
 
-<script src="{% static 'lib/adminlte-3.1.0/plugins/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'lib/adminlte-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'lib/adminlte-3.1.0/js/adminlte.min.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script src="{% static 'js/functions.js' %}"></script>
-
-
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'footer.html' %}
+    </div>  
+    <script src="{% static 'lib/adminlte-3.1.0/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/adminlte-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/adminlte-3.1.0/js/adminlte.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'lib/jquery-confirm-3.3.2/jquery-confirm.min.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
 {% block js%}{% endblock js %}
+
 
 </body>
 </html>-

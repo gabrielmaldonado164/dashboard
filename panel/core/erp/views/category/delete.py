@@ -4,14 +4,20 @@
 from django.views.generic import DeleteView
 from django.http import JsonResponse
 from django.urls    import reverse_lazy
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Custom
 from core.erp.models.category   import Category
 from core.erp.forms.category.add_category_form  import CategoryForm
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     form_class = CategoryForm
     template_name = 'category/delete.html'
     success_url = reverse_lazy('category_list_view')
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDeleteView, self).get_context_data(**kwargs)
+        context['title'] = 'Eliminar  categoria'
+        return context
+    

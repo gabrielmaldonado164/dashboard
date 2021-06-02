@@ -1,93 +1,74 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block body %}
-<body class="hold-transition layout-top-nav">
-    <div class="wrapper">
-        {% include 'navbar-home.html' %}
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bienvenido <small>Example 3.0</small></h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="container">
-                    <form action="" method="POST" id="form-create">
-                        <div class="card card-default">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-plus">{{ title }}</i></h3>
-                            </div>
-                
-                            <div class="card-body">
-                                {% csrf_token %}
-                                
-                                {% if form.errors %}
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                                        <h5><i class="icon fas fa-ban"></i>Alert!</h5>
-                                        <ul>
-                                            {% for field in form %}
-                                                {% for error in field.errors %}
-                                                    <li>{{ error }}</li>
-                                                {% endfor %}
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                {% endif %}
-                                <input type="hidden" name="action" value="add">
-                                {% for field in form %}
-                                <div class="form-group">
-                                    <label>{{field.label}}</label>
-                                    {{field}}
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
-                                  Guardar registro
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div> 
-            </div>
+{% block content %}
+<form action="" method="POST" id="form-create">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-plus"></i>
+                {{ title }}
+            </h3>
         </div>
-        {% include 'footer.html' %}
-    </div>
 
-{% endblock %}
-{% block js%}
+        <div class="card-body">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                    <ul>
+                        {% for field in form %}
+                            {{form.errors}}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <input type="hidden" name="action" value="add">
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
+              Guardar registro
+            </button>
+        </div>
+    </div>
+</form>
+
+{% block js %}
 <script type="application/javascript">
-   $('#form-create').on('submit', function (e){
-       e.preventDefault();//no se haga el envio de manera automatica
-       let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
-       console.log(parameters)
-       $.ajax({
-                url:"{% url 'category_create_view' %}",
-                type:'POST',
-                data:parameters,
-                dataType:'json'
-            }).done(function(data) {
-                if(!data.hasOwnProperty('error')){//hasOwnProperty -> me deje tomar el dato de la propiedad
-                    location.href = "{% url 'category_list_view' %}";
-                    return false;
-                }
-                message_error(data.error);//si hay error lo recorro
-            }).fail(function(jqXHR, textStatus,errorThrown ) {//methods the ajax for errors
-                alert(textStatus+': '+ errorThrown);
-            })
-   });
+    $('#form-create').on('submit', function (e){
+        e.preventDefault();//no se haga el envio de manera automatica
+        let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        console.log(parameters)
+        $.ajax({
+                 url:"{% url 'category_create_view' %}",
+                 type:'POST',
+                 data:parameters,
+                 dataType:'json'
+             }).done(function(data) {
+                 if(!data.hasOwnProperty('error')){//hasOwnProperty -> me deje tomar el dato de la propiedad
+                    
+                     location.href = "{% url 'category_list_view' %}";
+                     return false;
+                 }
+                 message_error(data.error);//si hay error lo recorro
+             }).fail(function(jqXHR, textStatus,errorThrown ) {//methods the ajax for errors
+                 alert(textStatus+': '+ errorThrown);
+             })
+        
+
+    });
+
 </script>
-{% endblock js %}
-</body>
+{% endblock js%}
+{% endblock content %}

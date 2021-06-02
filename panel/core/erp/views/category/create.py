@@ -4,13 +4,15 @@
 from django.views.generic import CreateView
 from django.http import JsonResponse
 from django.urls    import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 # Custom
 from core.erp.models.category   import Category
 from core.erp.forms.category.add_category_form  import CategoryForm
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'category/create.html'

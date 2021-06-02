@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block content %}
-<form action="" method="POST" id="form-edit">
+<form action="" method="POST" id="form">
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">
@@ -13,7 +13,7 @@
 
         <div class="card-body">
             {% csrf_token %}
-            
+            {{ form.non_field_errors }}
             {% if form.errors %}
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -42,31 +42,4 @@
         </div>
     </div> 
 </form>
-{% block js %}
-<script type="application/javascript">
-    $('#form-edit').on('submit', function (e){
-        e.preventDefault();//no se haga el envio de manera automatica
-        let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
-        console.log(parameters)
-        $.ajax({
-                 url:window.location.pathname,
-                 type:'POST',
-                 data:parameters,
-                 dataType:'json'
-             }).done(function(data) {
-                if(!data.hasOwnProperty('error')){//hasOwnProperty -> me deje tomar el dato de la propiedad
-                    
-                    location.href = "{% url 'category_list_view' %}";
-                 return false;
-                }
-
-                message_error(data.error);//si hay error lo recorro
-             }).fail(function(jqXHR, textStatus,errorThrown ) {//methods the ajax for errors
-                alert(textStatus+': '+ errorThrown);
-             })
-    });
- </script>
-
-{% endblock js %}
 {% endblock content %}
-

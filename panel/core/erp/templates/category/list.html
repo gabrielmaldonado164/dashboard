@@ -1,94 +1,98 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block body %}
-<body class="hold-transition layout-top-nav">
-    <div class="wrapper">
-        {% include 'navbar-home.html' %}
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bienvenido <small>Example 3.0</small></h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="container">
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fas fa-search">{{ title }}</i></h3>
-                        </div>
-    
-                        <div class="card-body">
-                            <table class="table" id="data">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nro</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for category in categories %}
-                                    <tr>
-                                        <td>{{ category.id }}</td>
-                                        <td>{{ category.name }}</td>
-                                        <td>
-                                            <a href="{% url 'category_edit_view' category.id %}" type="button" class="btn btn-warning btn-xs"><i class="far fa-edit"></i></a>
-                                            <a href="{% url 'category_delete_view' category.id %}" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-footer">
-                            <a href="{% url 'category_create_view' %}" class="btn btn-primary" id="btn-test"><i class="fas fa-plus"></i>
-                              Nuevo registro
-                            </a>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-        {% include 'footer.html' %}
+{% block css %}
+
+{% endblock css %}
+
+
+{% block content %}
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fas fa-search"></i>
+            {{ title }}
+        </h3>
     </div>
 
-{% endblock %}
+    <div class="card-body">
+        <table class="table" id="data">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 10%;" >Nro</th>
+                    <th scope="col" style="width: 20%;">Name</th>
+                    <th scope="col" style="width: 50%;">Description</th>
+                    <th scope="col" style="width: 20%;">Opciones</th>
+                </tr>
+            </thead>
+                <tbody>
+                        <!-- iterar con django 
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.name }}</td>
+                                <td>
+                                    <a href="{% url 'category_edit_view' category.id %}" type="button" class="btn btn-warning btn-xs"><i class="far fa-edit"></i></a>
+                                    <a href="{% url 'category_delete_view' category.id %}" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        -->
+                </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'category_create_view' %}" class="btn btn-primary" id="btn-test"><i class="fas fa-plus"></i>
+          Nuevo registro
+        </a>
+    </div>
+</div>
+
+{% endblock content%}
 {% block js%}
+
 <script type="application/javascript">
     $(document).ready(function() {
         $('#data').DataTable({
             responsive:true,
-            autoWidth: false,   
+            autoWidth: false,
+            destroy:true,
+            deferRender:true, 
             "language":{
                 url:'{% static "lib/datatables-1.10.24/spanish.txt" %}'
-            }         
-        });
-
-        $('#btn-test').on('click', function(){
-            $.ajax({
+            },
+            ajax: {
                 url:"{% url 'category_list_view' %}",
-                type:'POST',
-                data:{id:1},
-                dataType:'json'
-            }).done(function(data) {
-                console.log(data)
-            }).fail(function(jqXHR, textStatus,errorThrown ) {//methods the ajax for errors
-                alert(textStatus+': '+ errorThrown);
-            })
+                type:"POST",
+                data:{
+                    "action":"list"
+                },
+                dataSrc:""
+            },
+            columns: [ //generro los datos de las columnas que tengo
+            {"data":"id"},
+            {"data":"name"},
+            {"data":"description"},
+            {"data":"description"},
+            ],
+            columnDefs:[ //edit la ultima columna para agregar botones
+                {
+                    targets: [3],
+                    class: 'text-center',
+                    ordenable:false,
+                    render: function(data, type, row){ //puede rendear cualquier contenido que quiera a la columba que le diga en este caso los botones
+                        let buttons = '<a href= "/erp/category/edit/'+row.id+'/" class="btn btn-warning btn-xs"><i class="far fa-edit"></i></a>';
+                        buttons +='<a href="/erp/category/delete/'+row.id+'/" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>';
+                        return buttons;
+                    }
+                },
+            ],
+            initComplete: function(settings, json){//cuando este completo la carga puedo agregar alguna accion para hacer
+                //alert('cargado')
+            }
 
         });
-    } );
+    });
 </script>
 {% endblock js %}
-</body>

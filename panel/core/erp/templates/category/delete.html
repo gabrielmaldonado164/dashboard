@@ -1,72 +1,46 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block body %}
-<body class="hold-transition layout-top-nav">
-    <div class="wrapper">
-        {% include 'navbar-home.html' %}
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bienvenido <small>Example 3.0</small></h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                            </ol>
-                        </div>
-                    </div>
+{% block content %}
+<form action="" method="POST" id="form-edit">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-trash"></i>
+                {{ title }}
+            </h3>
+        </div>
+
+        <div class="card-body">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
                 </div>
-            </div>
-            <div class="content">
-                <div class="container">
-                    <form action="" method="POST" id="form-edit">
-                        <div class="card card-default">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-plus">{{ title }}</i></h3>
-                            </div>
-                
-                            <div class="card-body">
-                                {% csrf_token %}
-                                
-                                {% if form.errors %}
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                                        <h5><i class="icon fas fa-ban"></i>Alert!</h5>
-                                        <ul>
-                                            {% for field in form %}
-                                                {% for error in field.errors %}
-                                                    <li>{{ error }}</li>
-                                                {% endfor %}
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                {% endif %}
+            {% endif %}
 
-                                <div class="alert alert-danger alert-dismissible">
-                                    <h5><i class="icon fas fa-ban"></i>Notificacion!</h5>
-                                    Desea eliminar el registro {{ object.id}}
+            <div class="alert alert-danger alert-dismissible">
+                <h5><i class="icon fas fa-ban"></i>Notificacion!</h5>
+                Desea eliminar el registro {{ object.id}}
 
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
-                                 Si, aceptar
-                                </button>
-                                <a href="{% url 'category_list_view' %}" class="btn btn-info"><i class="fas fa-time"></i>
-                                No, cancelar</a>
-                            </div>
-                        </div>
-                    </form>
-                </div> 
             </div>
         </div>
-        {% include 'footer.html' %}
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
+             Si, aceptar
+            </button>
+            <a href="{% url 'category_list_view' %}" class="btn btn-info"><i class="fas fa-times"></i>
+            No, cancelar</a>
+        </div>
     </div>
-
-{% endblock %}
-
-</body>
+</form>
+{% endblock content %}

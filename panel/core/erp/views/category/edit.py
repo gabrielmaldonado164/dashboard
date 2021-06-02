@@ -4,13 +4,13 @@
 from django.views.generic import UpdateView
 from django.http import JsonResponse
 from django.urls    import reverse_lazy
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Custom
 from core.erp.models.category   import Category
 from core.erp.forms.category.add_category_form  import CategoryForm
 
-class CategoryEditView(UpdateView):
+class CategoryEditView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'category/edit.html'
