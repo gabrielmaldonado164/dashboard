@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<form action="" method="POST" id="form-create">
+<form action="" method="POST" id="form-create" enctype="multipart/form-data">
     <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">
@@ -41,7 +41,7 @@
             <button class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
               Guardar registro
             </button>
-            <a class="btn btn-danger"  href="{% url 'category_list_view' %}"><i class="fas fa-times"></i>
+            <a class="btn btn-danger"  href="{% url 'product_list_view' %}"><i class="fas fa-times"></i>
                 Cancelar
             </a>
         </div>
@@ -81,12 +81,16 @@
 <script type="application/javascript">
     $('#form-create').on('submit', function (e){
         e.preventDefault();//no se haga el envio de manera automatica
-        let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        //let parameters = $(this).serializeArray(); ->  me permite tomar todo los datos de mi form como diccionario menos los FILES
+        let parameters= new FormData(this); //-> me permite tener todo los datos incluido FILES
+        parameters.forEach(function(value,key){
+            console.log(key+':'+value);
+        });
         console.log(parameters)
         submit_with_ajax(window.location.pathname, parameters, function(){
-            location.href = '{% url  "category_list_view" %}'
+            location.href = '{% url  "product_list_view" %}'
         });
-        
+            
     });
 </script>
 {% endblock js%}

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Django
-from django.views.generic import UpdateView
-from django.http import JsonResponse
-from django.urls    import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic                       import UpdateView
+from django.http                                import JsonResponse
+from django.urls                                import reverse_lazy
+from django.contrib.auth.mixins                 import LoginRequiredMixin
 
 # Custom
-from core.erp.models.category   import Category
+from core.erp.models.category                   import Category
 from core.erp.forms.category.add_category_form  import CategoryForm
 
 class CategoryEditView(LoginRequiredMixin, UpdateView):
@@ -40,7 +40,7 @@ class CategoryEditView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryEditView, self).get_context_data(**kwargs)
-        context['title'] = 'Editar categoria'
+        context['title'] = 'Eliminar categoria'
         return context
     
 

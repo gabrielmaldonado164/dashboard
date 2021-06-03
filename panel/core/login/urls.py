@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Django
-from django.contrib import admin
-from django.urls import path
+from django.contrib           import admin
+from django.urls              import path
 
 # Custom
 from core.login.views.login   import LoginFormView

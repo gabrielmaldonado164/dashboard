@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
     {% load static%}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/plugins/font-awesome-5.11.1/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.1.0/css/adminlte.min.css' %}">
-    <!--<link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0-dist/css/bootstrap.min.css' %}"> -->
-    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
-    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'lib/jquery-confirm-3.3.2/jquery-confirm.min.css' %}">
-    
-
-
-    {% block css %}{% endblock css %}
-    <title>Dashboard</title>
+    <!--<link rel="stylesheet" href="{% static 'lib/bootstrap-4.6.0-dist/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}">
+    -->
+    {% block head %}
+    {% endblock head %}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed" >
     <div class="wrapper">
@@ -52,18 +51,20 @@
         <!-- Footer -->
         {% include 'footer.html' %}
     </div>  
+
     <script src="{% static 'lib/adminlte-3.1.0/plugins/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'lib/adminlte-3.1.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'lib/adminlte-3.1.0/js/adminlte.min.js' %}"></script>
-    <script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>
-    <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
+    <!-- 
+        <script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
+        <script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
+    -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'lib/jquery-confirm-3.3.2/jquery-confirm.min.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
-{% block js%}{% endblock js %}
-
+    {% block js%}{% endblock js %}
 
 </body>
 </html>-

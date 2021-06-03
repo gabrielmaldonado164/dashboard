@@ -6,17 +6,15 @@ from django.http                                import JsonResponse
 from django.urls                                import reverse_lazy
 from django.contrib.auth.mixins                 import LoginRequiredMixin
 
-
-
 # Custom
-from core.erp.models.category                   import Category
-from core.erp.forms.category.add_category_form  import CategoryForm
+from core.erp.models.product                     import Product
+from core.erp.forms.product.add_product_form     import ProductForm
 
-class CategoryCreateView(LoginRequiredMixin, CreateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'category/create.html'
-    success_url = reverse_lazy('category_list_view')
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product/create.html'
+    success_url = reverse_lazy('product_list_view')
 
     #puedo usar el post de esta manera con ajax 
     def post(self, request, *args, **kwargs):
@@ -32,12 +30,11 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
             else:
                 data['error'] = 'No hay action con ese nombre'
         except Exception as e:
-            data ['error'] = str(e)
-        return JsonResponse(data, safe=False )
-        
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
 
     def get_context_data(self, **kwargs):
-        context = super(CategoryCreateView, self).get_context_data(**kwargs)
-        context['title'] = 'Crear categoria'
+        context = super(ProductCreateView, self).get_context_data(**kwargs)
+        context['title'] = 'Crear Producto'
         return context
     

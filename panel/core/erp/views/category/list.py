@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
 # Django
-from django.shortcuts import render
-from django.views.generic import ListView
-from django.http import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts               import render
+from django.views.generic           import ListView
+from django.http                    import JsonResponse
+from django.utils.decorators        import method_decorator
+from django.views.decorators.csrf   import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins     import LoginRequiredMixin
 
 
 
 # Custom
-from core.erp.models.category   import Category
+from core.erp.models.category        import Category
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category

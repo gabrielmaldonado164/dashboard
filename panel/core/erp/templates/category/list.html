@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block css %}
 
-{% endblock css %}
+{% block head %}  
+<link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}">
+{% endblock head %}
+
 
 
 {% block content %}
@@ -50,7 +53,12 @@
 </div>
 
 {% endblock content%}
+
 {% block js%}
+<script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>    
+<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
 
 <script type="application/javascript">
     $(document).ready(function() {

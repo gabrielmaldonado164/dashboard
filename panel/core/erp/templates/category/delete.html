@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block content %}
-<form action="" method="POST" id="form-edit">
+<form action="" method="POST" id="form-delete">
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">
@@ -13,20 +13,23 @@
 
         <div class="card-body">
             {% csrf_token %}
-            
-            {% if form.errors %}
+             <input type="hidden" name="action" value="delete">
+            <!--
+
+                {% if form.errors %}
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     <h5><i class="icon fas fa-ban"></i>Alert!</h5>
                     <ul>
                         {% for field in form %}
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
                         {% endfor %}
                     </ul>
                 </div>
-            {% endif %}
+                {% endif %}
+            --> 
 
             <div class="alert alert-danger alert-dismissible">
                 <h5><i class="icon fas fa-ban"></i>Notificacion!</h5>
@@ -44,3 +47,15 @@
     </div>
 </form>
 {% endblock content %}
+{% block js %}
+<script type="application/javascript">
+    $('#form-delete').on('submit', function (e){
+        e.preventDefault();//no se haga el envio de manera automatica
+        let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        console.log(parameters)
+        submit_with_ajax(window.location.pathname, parameters, function(){
+            location.href = '{% url "category_list_view" %}'
+        });
+    });
+</script>
+{% endblock js %}
