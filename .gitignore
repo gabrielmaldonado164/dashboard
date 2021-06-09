@@ -8,7 +8,6 @@ db.sqlite3
 db.sqlite3-journal
 bin/
 include/
-lib/
 lib64/
 pyvenv.cfg
 __pycache__

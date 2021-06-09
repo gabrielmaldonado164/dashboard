@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Custom
     'core.erp',
     'core.login',
+    'core.user',
 ]
 
 MIDDLEWARE = [
@@ -144,5 +145,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+#New model the user
+AUTH_USER_MODEL ='user.User'
 
 
