@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<form action="" method="POST" id="form-edit">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-edit"></i> 
+                {{ title }}
+            </h3>
+        </div>
+
+        <div class="card-body">
+            {% csrf_token %}
+            <!--
+                {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h5><i class="icon fas fa-ban"></i>Alert!</h5>
+                    <ul>
+                        {% for field in form %}
+                        {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            -->
+            <input type="hidden" name="action" value="edit">
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" id="btn-test"><i class="fas fa-save"></i>
+              Guardar registro
+            </button>
+            <a class="btn btn-danger"  href="{% url 'product_list_view' %}"><i class="fas fa-times"></i>
+                Cancelar
+            </a>
+        </div>
+    </div> 
+</form>
+{% endblock content %}
+{% block js %}
+<script type="application/javascript">
+    $('#form-edit').on('submit', function (e){
+        e.preventDefault();//no se haga el envio de manera automatica
+        //let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        let parameters = new FormData(this);
+        console.log(parameters)
+        submit_with_ajax(window.location.pathname, parameters, function(){
+            location.href = '{% url "product_list_view" %}'
+        });
+    });
+</script>
+{% endblock js %}
+

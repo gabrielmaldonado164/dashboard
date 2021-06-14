@@ -40,7 +40,7 @@ class CategoryEditView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryEditView, self).get_context_data(**kwargs)
-        context['title'] = 'Eliminar categoria'
+        context['title'] = 'Editar categoria'
         return context
     
 

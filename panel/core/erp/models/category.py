@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 # Python
-from __future__                 import unicode_literals
+from __future__                         import unicode_literals
 
 # Django
-from django.db                  import models
-from django.utils.translation   import ugettext_lazy as _
-from django.forms               import model_to_dict
+from django.db                          import models
+from core.erp.models.models_auditoria   import AuditoriaModel
+from django.utils.translation           import ugettext_lazy as _
+from django.forms                       import model_to_dict
 
 
 
 
-class Category(models.Model):
+class Category(AuditoriaModel):
     name = models.CharField(max_length=150, verbose_name=_(u'Name'), unique= True)
     description = models.TextField(max_length=300, null=True, blank=True, verbose_name=_(u'Description'))
 

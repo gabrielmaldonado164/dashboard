@@ -26,8 +26,8 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
             -->
-            {% endif %}
             <input type="hidden" name="action" value="edit">
             {% for field in form %}
             <div class="form-group">
@@ -46,18 +46,18 @@
         </div>
     </div> 
 </form>
+{% endblock content %}
 {% block js %}
 <script type="application/javascript">
     $('#form-edit').on('submit', function (e){
         e.preventDefault();//no se haga el envio de manera automatica
-        let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        //let parameters = $(this).serializeArray(); //me permite tomar todo los datos de mi form como diccionario
+        let parameters = new FormData(this);
         console.log(parameters)
         submit_with_ajax(window.location.pathname, parameters, function(){
             location.href = '{% url "category_list_view" %}'
         });
     });
- </script>
-
+</script>
 {% endblock js %}
-{% endblock content %}
 

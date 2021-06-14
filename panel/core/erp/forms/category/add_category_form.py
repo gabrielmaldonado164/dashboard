@@ -28,6 +28,8 @@ class CategoryForm(ModelForm):
             )
         }
 
+        exclude = ['user_creation', 'user_update']
+
     #test 
     def clean(self):
         cleaned = super().clean()

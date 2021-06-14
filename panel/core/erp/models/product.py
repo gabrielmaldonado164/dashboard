@@ -8,7 +8,7 @@ from datetime                   import datetime
 from django.db                  import models
 from django.utils.translation   import ugettext_lazy as _
 from django.forms               import model_to_dict
-from panel.settings            import STATIC_URL
+from panel.settings             import STATIC_URL
 
 
 # Custom 

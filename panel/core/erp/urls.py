@@ -6,15 +6,18 @@ from django.urls import path
 
 # Custom
 # Category
-from core.erp.views.category.list   import CategoryListView
-from core.erp.views.category.create import CategoryCreateView
-from core.erp.views.category.edit   import CategoryEditView
-from core.erp.views.category.delete import CategoryDeleteView
+from core.erp.views.category.list     import CategoryListView
+from core.erp.views.category.create   import CategoryCreateView
+from core.erp.views.category.edit     import CategoryEditView
+from core.erp.views.category.delete   import CategoryDeleteView
 from core.erp.views.category.formview import CategoryFormView
 
 # Product
 from core.erp.views.product.list    import ProductListView
 from core.erp.views.product.create  import ProductCreateView
+from core.erp.views.product.delete  import ProductDeleteView
+from core.erp.views.product.edit    import ProductEditView
+
 
 
 urlpatterns = [
@@ -28,6 +31,6 @@ urlpatterns = [
     # Product
     path('product/list/',  ProductListView.as_view(), name='product_list_view'),
     path('product/add/',  ProductCreateView.as_view(), name='product_create_view'),
-
-
+    path('product/edit/<int:pk>/', ProductEditView.as_view(), name='product_edit_view'),
+    path('product/delete/<int:pk>/', ProductDeleteView.as_view(), name='product_delete_view'),
 ]

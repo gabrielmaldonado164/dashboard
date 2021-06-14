@@ -19,7 +19,6 @@ function message_error(obj){
 
 }
 
-
 function submit_with_ajax(url, parameters, callback){
     $.confirm({
         theme: 'modern',
