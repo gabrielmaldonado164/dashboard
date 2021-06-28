@@ -26,5 +26,4 @@ class ProductForm(ModelForm):
             pass
             #raise self.model.ValidationErrors('Validacion erronea')#errores personalisados por cualquier otra que quiera hacer
             #self.add_error('name', 'Faltan caracteres')# errores para cada componentes del form
-        
         return cleaned

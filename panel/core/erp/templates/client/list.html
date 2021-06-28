@@ -1,15 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% load static %}
 
-{% block head %}  
+{% block head %}
 <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
 <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}">
 {% endblock head %}
 
-
-
-{% block content %}
+{%  block content %}
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">
@@ -22,18 +20,15 @@
         <table class="table" id="data">
             <thead>
                 <tr>
-                    <th scope="col" style="width: 10%;" >Nro</th>
-                    <th scope="col" style="width: 20%;">Name</th>
-                    <th scope="col" style="width: 20%;">Category</th>
-                    <th scope="col" style="width: 10%;">Image</th>
-                    <th scope="col" style="width: 10%;">pvp</th>
-                    <th scope="col" style="width: 5%;">Opciones</th>
-
+                    <th scope="col" style="width: 10%;" >Name</th>
+                    <th scope="col" style="width: 20%;">Surname</th>
+                    <th scope="col" style="width: 20%;">Addres</th>
+          
                 </tr>
             </thead>
-                <tbody>
-                    
 
+                <tbody>
+                    <!--
                         {% for product in products %}
                         <tr>
                             <td>{{ product.id }}</td>
@@ -47,9 +42,7 @@
                             </td>
                         </tr>
                         {% endfor %}
-
-                    
-      
+                    -->
                 </tbody>
         </table>
     </div>
@@ -60,26 +53,8 @@
         </a>
     </div>
 </div>
+{% endblock content %}
 
-{% endblock content%}
+{% block js %}
 
-{% block js%}
-<script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
-<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>    
-<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
-
-<script type="application/javascript">
-    $(document).ready(function() {
-        $('#data').DataTable({
-            responsive:true,
-            autoWidth: false,
-            destroy:true,
-            deferRender:true, 
-            "language":{
-                url:'{% static "lib/datatables-1.10.24/spanish.txt" %}'
-            },
-        });
-    });
-</script>
 {% endblock js %}

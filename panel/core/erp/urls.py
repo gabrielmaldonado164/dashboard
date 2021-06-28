@@ -18,6 +18,8 @@ from core.erp.views.product.create  import ProductCreateView
 from core.erp.views.product.delete  import ProductDeleteView
 from core.erp.views.product.edit    import ProductEditView
 
+# Client 
+from core.erp.views.client.list     import ClientListView
 
 
 urlpatterns = [
@@ -33,4 +35,9 @@ urlpatterns = [
     path('product/add/',  ProductCreateView.as_view(), name='product_create_view'),
     path('product/edit/<int:pk>/', ProductEditView.as_view(), name='product_edit_view'),
     path('product/delete/<int:pk>/', ProductDeleteView.as_view(), name='product_delete_view'),
+
+    # Client
+    path('client/list/', ClientListView.as_view(), name='client_list_view' ),
+    
+    
 ]
