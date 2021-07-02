@@ -9,7 +9,7 @@ from django.shortcuts          import redirect
 
 class LoginFormView(LoginView):
     template_name = 'login.html'
-    success_url = reverse_lazy('category_list_view')
+    success_url = reverse_lazy('home')
     
 
     def dispatch(self, request, *args, **kwargs):

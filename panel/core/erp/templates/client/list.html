@@ -5,6 +5,7 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/css/dataTables.bootstrap4.min.css' %}">
 <link rel="stylesheet" href="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/css/responsive.bootstrap4.min.css' %}">
+
 {% endblock head %}
 
 {%  block content %}
@@ -20,9 +21,13 @@
         <table class="table" id="data">
             <thead>
                 <tr>
+                    <th scope="col" style="width: 10%;" >Id</th>
                     <th scope="col" style="width: 10%;" >Name</th>
                     <th scope="col" style="width: 20%;">Surname</th>
                     <th scope="col" style="width: 20%;">Addres</th>
+                    <th scope="col" style="width: 20%;">option</th>
+
+
           
                 </tr>
             </thead>
@@ -47,7 +52,7 @@
         </table>
     </div>
     <div class="card-footer">
-        <a href="{% url 'product_create_view' %}" class="btn btn-primary" 
+        <a class="btn btn-primary "  id="btnAdd"
         ><i class="fas fa-plus"></i>
           Nuevo registro
         </a>
@@ -56,5 +61,50 @@
 {% endblock content %}
 
 {% block js %}
+<script src="{% static 'lib/datatables-1.10.24/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'lib/datatables-1.10.24/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/dataTables.responsive.min.js' %}"></script>    
+<script src="{% static 'lib/datatables-1.10.24/plugins/responsive-2.2.7/js/responsive.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'client/js/list.js' %}"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalClient" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form method="POST" action="." id="form-create" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                     <b><i class="fas fa-search"></i> <span></span></b>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <input name="action" type="hidden" value="add">
+                    <input name="id" id="id" type="hidden" value="0">
+
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label>{{field.label}}</label>
+                            {{field}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-save"></i>
+                    Save
+                </button>
+            </div>
+            </div>
+        </div>
+
+    </form>
+</div>
 
 {% endblock js %}

@@ -133,7 +133,7 @@ STATICFILES_DIRS = [
     ]
 
 #Login success
-LOGIN_REDIRECT_URL = '/erp/category/list/'
+LOGIN_REDIRECT_URL = '/erp/dashboard'
 
 #Logout success
 LOGOUT_REDIRECT_URL = '/login/'

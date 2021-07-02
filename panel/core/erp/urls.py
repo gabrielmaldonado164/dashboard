@@ -21,6 +21,9 @@ from core.erp.views.product.edit    import ProductEditView
 # Client 
 from core.erp.views.client.list     import ClientListView
 
+# Home
+from core.erp.views.dashboard.views     import DashboardView
+
 
 urlpatterns = [
     # Category
@@ -38,6 +41,8 @@ urlpatterns = [
 
     # Client
     path('client/list/', ClientListView.as_view(), name='client_list_view' ),
-    
-    
+
+
+    # Home    
+    path('dashboard/', DashboardView.as_view(), name='home',)
 ]
